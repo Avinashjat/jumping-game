@@ -65,7 +65,7 @@ body{
 
 
     .carani{
-        animation: carani 5s linear infinite ;
+        animation: carani 6s linear infinite ;
     } 
     @keyframes carani{
         0%{

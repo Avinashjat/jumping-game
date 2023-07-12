@@ -14,6 +14,11 @@ score = 0;
 cross = true;
 
 
+gameoveraudio = new Audio('gameover.mp3');
+// setTimeout(() => {
+//   Audio.play
+// }, 1000);
+
 let animationInterval;
 
 document.onkeydown = function(e) {
@@ -55,6 +60,7 @@ setInterval(()=>{
     gameover = document.querySelector('.gameover');
     car = document.querySelector('.car');
 
+
     hx = parseInt(window.getComputedStyle(hero, null).getPropertyValue('left'));
     hy = parseInt(window.getComputedStyle(hero, null).getPropertyValue('top'));
     cx = parseInt(window.getComputedStyle(car, null).getPropertyValue('left'));
@@ -65,10 +71,16 @@ setInterval(()=>{
 
     console.log(offsetX,offsetY)
 
-    if(offsetX < 97 && offsetY < 178){
+    if(offsetX < 90 && offsetY < 158){
         gameover.style.visibility = 'visible';
         car.classList.remove('carani')
+        
+     gameoveraudio.play();
+     setTimeout(() => {
+      gameoveraudio.pause();
+     }, 1000);
     }
+
     else if(offsetX < 115 && cross){
         score +=1;
         updatescore(score);
@@ -76,10 +88,16 @@ setInterval(()=>{
         setTimeout(()=>{
             cross = true;
         },1000)
+        setTimeout(() => {
+          durationani = parseFloat(window.getComputedStyle(car, null).getPropertyValue('animation-duration'));
+       newduration = durationani - 0.1 ;
+       car.style.animationDuration =  newduration + 's' ;
+        }, 2000);
+       
     }
    
 
-},100)
+},60)
 
 
 function updatescore(score) {
